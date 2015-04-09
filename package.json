@@ -3,5 +3,17 @@
   "version": "0.0.1",
   "description": "Node plugin for boilercontrol",
   "author": "Ross Harper <ross@rossharper.net>",
-  "private": true
+  "private": true,
+  "main": "boilercontrol.js",
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rossharper/boilercontrol-node.git"
+  },
+  "engines": {
+  	"node": ">=0.12.0"
+  },
+  "gypfile": true
 }
