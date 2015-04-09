@@ -6,7 +6,7 @@ Node.js wrapper for [boilercontrol](https://github.com/rossharper/boilercontrol)
 
 Requires:
 
-- node-gyp
+- [node-gyp](https://github.com/TooTallNate/node-gyp)
 
 Requires the following installed as dynamic libraries:
 
