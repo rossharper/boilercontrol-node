@@ -1,1 +1,1 @@
-module.exports = require('bindings')('boilercontrol.node');
+module.exports = require('./build/Release/boilercontrol');
