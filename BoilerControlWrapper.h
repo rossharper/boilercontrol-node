@@ -11,7 +11,8 @@ public:
     static void Init(v8::Handle<v8::Object> exports);
 
 private:
-    explicit BoilerControlWrapper(int value = 0);
+    explicit BoilerControlWrapper(int pin);
+    explicit BoilerControlWrapper(int pin, int nonRealtimeOffset);
     ~BoilerControlWrapper();
 
     static void New(const v8::FunctionCallbackInfo<v8::Value>& args);

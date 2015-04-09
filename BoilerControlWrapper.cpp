@@ -11,6 +11,10 @@ BoilerControlWrapper::BoilerControlWrapper(int pin) {
 	this->boilercontrol = new BoilerControl(TransmitPinFactory::create(pin));
 }
 
+BoilerControlWrapper::BoilerControlWrapper(int pin, int nonRealtimeOffset) {
+  this->boilercontrol = new BoilerControl(TransmitPinFactory::create(pin, nonRealtimeOffset));
+}
+
 BoilerControlWrapper::~BoilerControlWrapper() {
 	delete boilercontrol;
 	boilercontrol = 0;
@@ -39,8 +43,14 @@ void BoilerControlWrapper::New(const FunctionCallbackInfo<Value>& args) {
 
   if (args.IsConstructCall()) {
     // Invoked as constructor: `new MyObject(...)`
-    int value = args[0]->IsUndefined() ? 0 : args[0]->NumberValue();
-    BoilerControlWrapper* obj = new BoilerControlWrapper(value);
+    int pin = args[0]->IsUndefined() ? 0 : args[0]->NumberValue();
+    BoilerControlWrapper* obj;
+    if(args[1]->IsUndefined()) {
+      obj = new BoilerControlWrapper(pin);
+    }
+    else {
+      obj = new BoilerControlWrapper(pin, args[1]->NumberValue());
+    }
     obj->Wrap(args.This());
     args.GetReturnValue().Set(args.This());
   } else {
