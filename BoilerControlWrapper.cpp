@@ -1,13 +1,19 @@
 #include "BoilerControlWrapper.h"
 
+#include "TransmitPinFactory.h"
+#include "BoilerControl.h"
+
 using namespace v8;
 
 Persistent<Function> BoilerControlWrapper::constructor;
 
 BoilerControlWrapper::BoilerControlWrapper(int pin) {
+	this->boilercontrol = new BoilerControl(TransmitPinFactory::create(pin));
 }
 
 BoilerControlWrapper::~BoilerControlWrapper() {
+	delete boilercontrol;
+	boilercontrol = 0;
 }
 
 void BoilerControlWrapper::Init(Handle<Object> exports) {
