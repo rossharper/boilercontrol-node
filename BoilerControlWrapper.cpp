@@ -26,6 +26,7 @@ void BoilerControlWrapper::Init(Handle<Object> exports) {
 
   // Prototype
   NODE_SET_PROTOTYPE_METHOD(tpl, "sendOnSignal", SendOnSignal);
+  NODE_SET_PROTOTYPE_METHOD(tpl, "sendOffSignal", SendOffSignal);
 
   constructor.Reset(isolate, tpl->GetFunction());
   exports->Set(String::NewFromUtf8(isolate, "BoilerControl"),
@@ -57,5 +58,12 @@ void BoilerControlWrapper::New(const FunctionCallbackInfo<Value>& args) {
 
     BoilerControlWrapper* obj = ObjectWrap::Unwrap<BoilerControlWrapper>(args.Holder());
     obj->boilercontrol->sendOnSignal();
-    //args.GetReturnValue().Set(Number::New(isolate, obj->value_));
+  }
+
+  void BoilerControlWrapper::SendOffSignal(const FunctionCallbackInfo<Value>& args) {
+    Isolate* isolate = Isolate::GetCurrent();
+    HandleScope scope(isolate);
+
+    BoilerControlWrapper* obj = ObjectWrap::Unwrap<BoilerControlWrapper>(args.Holder());
+    obj->boilercontrol->sendOffSignal();
   }
