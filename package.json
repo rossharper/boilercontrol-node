@@ -1,0 +1,7 @@
+{
+  "name": "boilercontrol",
+  "version": "0.0.1",
+  "description": "Node plugin for boilercontrol",
+  "author": "Ross Harper <ross@rossharper.net>",
+  "private": true
+}
