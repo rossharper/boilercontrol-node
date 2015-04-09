@@ -21,7 +21,8 @@ private:
     static v8::Persistent<v8::Function> constructor;
 
 private:
-    BoilerControl* boilercontrol;
+    int pin;
+    int nonRealtimeOffset;
 };
 
 #endif

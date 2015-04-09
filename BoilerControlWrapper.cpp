@@ -8,16 +8,16 @@ using namespace v8;
 Persistent<Function> BoilerControlWrapper::constructor;
 
 BoilerControlWrapper::BoilerControlWrapper(int pin) {
-	this->boilercontrol = new BoilerControl(TransmitPinFactory::create(pin));
+	this->pin = pin;
+  this->nonRealtimeOffset = -1;
 }
 
 BoilerControlWrapper::BoilerControlWrapper(int pin, int nonRealtimeOffset) {
-  this->boilercontrol = new BoilerControl(TransmitPinFactory::create(pin, nonRealtimeOffset));
+  this->pin = pin;
+  this->nonRealtimeOffset = nonRealtimeOffset;
 }
 
 BoilerControlWrapper::~BoilerControlWrapper() {
-	delete boilercontrol;
-	boilercontrol = 0;
 }
 
 void BoilerControlWrapper::Init(Handle<Object> exports) {
@@ -67,7 +67,18 @@ void BoilerControlWrapper::New(const FunctionCallbackInfo<Value>& args) {
     HandleScope scope(isolate);
 
     BoilerControlWrapper* obj = ObjectWrap::Unwrap<BoilerControlWrapper>(args.Holder());
-    obj->boilercontrol->sendOnSignal();
+    
+    TransmitPin* transmitPin;
+    if(obj->nonRealtimeOffset != -1) {
+      transmitPin = TransmitPinFactory::create(obj->pin, obj->nonRealtimeOffset);
+    }
+    else {
+      transmitPin = TransmitPinFactory::create(obj->pin);
+    }
+
+    BoilerControl* boilercontrol = new BoilerControl(transmitPin);
+    boilercontrol->sendOnSignal();
+    delete boilercontrol;
   }
 
   void BoilerControlWrapper::SendOffSignal(const FunctionCallbackInfo<Value>& args) {
@@ -75,5 +86,16 @@ void BoilerControlWrapper::New(const FunctionCallbackInfo<Value>& args) {
     HandleScope scope(isolate);
 
     BoilerControlWrapper* obj = ObjectWrap::Unwrap<BoilerControlWrapper>(args.Holder());
-    obj->boilercontrol->sendOffSignal();
+
+    TransmitPin* transmitPin;
+    if(obj->nonRealtimeOffset != -1) {
+      transmitPin = TransmitPinFactory::create(obj->pin, obj->nonRealtimeOffset);
+    }
+    else {
+      transmitPin = TransmitPinFactory::create(obj->pin);
+    }
+
+    BoilerControl* boilercontrol = new BoilerControl(transmitPin);
+    boilercontrol->sendOffSignal();
+    delete boilercontrol;
   }
