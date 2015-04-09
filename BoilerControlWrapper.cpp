@@ -1,7 +1,7 @@
 #include "BoilerControlWrapper.h"
 
 #include "TransmitPinFactory.h"
-#include "BoilerControl.h"
+#include "boilercontrol.h"
 
 using namespace v8;
 

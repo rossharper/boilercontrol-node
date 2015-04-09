@@ -1,5 +1,5 @@
 #include <node.h>
-#include "boilercontrolwrapper.h"
+#include "BoilerControlWrapper.h"
 
 using namespace v8;
 
