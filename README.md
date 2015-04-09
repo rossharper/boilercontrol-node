@@ -1,6 +1,8 @@
 # boilercontrol-node
 
-Node.js wrapper for [boilercontrol](https://github.com/rossharper/boilercontrol)
+Node.js wrapper for [boilercontrol](https://github.com/rossharper/boilercontrol) ... that doesn't seem to work.
+
+For some reason the signal isn't generated correctly through the plugin (probably timings off).
 
 # Dependencies
 
