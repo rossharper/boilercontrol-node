@@ -1,6 +1,6 @@
 # boilercontrol-node
 
-Node.js wrapper for boiler control
+Node.js wrapper for [boilercontrol](https://github.com/rossharper/boilercontrol)
 
 # Dependencies
 
